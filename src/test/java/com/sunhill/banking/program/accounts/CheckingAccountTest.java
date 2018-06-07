@@ -39,7 +39,10 @@ public class CheckingAccountTest {
 	@Test
 	public void shouldWithdrawMoneyWithinLimit() {
 
-		Account checking = new CheckingAccount(new Owner(200, "Mohamed"), 10000D);
+		Owner owner = new Owner(200, "Mohamed");
+		owner.setChekingWithdrawLimit(3000D);
+
+		Account checking = new CheckingAccount(owner, 10000D);
 
 		// withdraw money within balance limit // should succeed
 		Assert.assertEquals(0, checking.withdraw(12000D));
@@ -128,7 +131,7 @@ public class CheckingAccountTest {
 		CheckingAccount checking = new CheckingAccount(owner, 1000D);
 
 		Owner owner1 = new Owner(700, "Mohamed");
-		owner.setChekingWithdrawLimit(5000D);
+		owner1.setChekingWithdrawLimit(5000D);
 
 		CheckingAccount checking1 = new CheckingAccount(owner1, 2000D);
 
