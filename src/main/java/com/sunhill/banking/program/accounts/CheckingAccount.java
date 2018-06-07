@@ -25,7 +25,7 @@ public class CheckingAccount extends Account {
 	 */
 	@Override
 	public int withdraw(double amount) {
-		if (balance + accountOwner.getChekingWithdrawLimit() > 0D) {
+		if (balance + accountOwner.getChekingWithdrawLimit() >= amount) {
 			balance -= amount;
 			return 0;
 		}
@@ -45,7 +45,7 @@ public class CheckingAccount extends Account {
 		try {
 			Account to = (CheckingAccount) STORE.find(account, CLAZZ);
 
-			if (super.withdraw(amount) == 0)
+			if (withdraw(amount) == 0)
 				return to.deposit(amount);
 			return 1;
 		} catch (TypeNotFoundException | IDNotFoundException e) {
