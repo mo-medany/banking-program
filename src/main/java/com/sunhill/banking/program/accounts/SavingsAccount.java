@@ -1,7 +1,5 @@
 package com.sunhill.banking.program.accounts;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import com.sunhill.banking.program.domain.Owner;
 
 /**
@@ -31,7 +29,6 @@ public class SavingsAccount extends Account {
 	 * @return 0 when interest provided to all accounts. 1 when any exception thrown
 	 */
 	public static int provideInterestToAllUsers() {
-		AtomicInteger result = new AtomicInteger(0);
 		try {
 			STORE.findAll(CLAZZ).forEach(account -> {
 				((SavingsAccount) account).balance += ((SavingsAccount) account).balance
@@ -39,9 +36,9 @@ public class SavingsAccount extends Account {
 			});
 		} catch (Exception e) {
 			e.printStackTrace();
-			result.set(1);
+			return 1;
 		}
-		return result.get();
+		return 0;
 	}
 
 	public double getRate() {
